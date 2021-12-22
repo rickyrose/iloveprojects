@@ -3,9 +3,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProjectsModule } from './projects/projects.module';
+import { ProjectRatingModule } from './project-rating/project-rating.module';
 
 @Module({
-  imports: [ProjectsModule, MongooseModule.forRoot('mongodb://localhost:27017/nest-proj'),],
+  imports: [ProjectsModule, MongooseModule.forRoot('mongodb://localhost:27017/nest-proj'), ProjectRatingModule,],
   controllers: [AppController],
   providers: [AppService],
 })

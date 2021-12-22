@@ -7,6 +7,8 @@ export class Project extends Document {
     name: string;
     @Prop()
     description: string;
+    @Prop({default: 0})
+    recomend: number;
     @Prop([String])
     stackinfo: string[];
 }
