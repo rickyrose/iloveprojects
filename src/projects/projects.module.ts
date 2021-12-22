@@ -33,4 +33,4 @@ controllers: [ProjectsController],
     ProjectFactory,
     {    provide: Stuff, useFactory: ()=>['aaaa', 'bbbb', 'cccc'], inject: [ProjectFactory],  useClass: process.env.NODE_ENV === 'development' ? DevelopConfigService : ProjectsService,}],
   exports:[ProjectsService]})
-export class ProjectsModule
+export class ProjectsModule {}
