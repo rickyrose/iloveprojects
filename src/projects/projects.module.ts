@@ -1,5 +1,7 @@
 import { Injectable, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { Connection } from 'mongoose';
+import { async } from 'rxjs';
 import { Event, EventSchema } from 'src/events/entities/event.entity';
 import { Project, ProjectSchema } from './entities/project.entitiy';
 import { Stuff } from './projects.constants';
@@ -31,6 +33,12 @@ class ProductionConfigService {}
 controllers: [ProjectsController],
  providers:[ProjectsService,
     ProjectFactory,
-    {    provide: Stuff, useFactory: ()=>['aaaa', 'bbbb', 'cccc'], inject: [ProjectFactory],  useClass: process.env.NODE_ENV === 'development' ? DevelopConfigService : ProjectsService,}],
+    {    provide: Stuff, useFactory: async (connection: Connection): Promise<string[]>=> {
+        const stuff = await Promise.resolve(['aaaa', 'bbbb', 'cccc']);
+        return stuff;
+    },],
+    inject: [Connection],
+
   exports:[ProjectsService]})
+
 export class ProjectsModule {}
